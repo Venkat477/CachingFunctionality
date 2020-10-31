@@ -19,8 +19,7 @@ class cacheForLRU:
             print('In Refresh Cache')
             fw = open('backup.txt','w')
             for key,val in self.cache.items():
-                fw.write(key+'\t'+val)
-                fw.write('\n')
+                fw.write(key+'\t'+val+'\n')
                 fw.flush()
                 
             current = time.time()
