@@ -1,7 +1,7 @@
 from caching import cacheForLRU
 from flask import Flask,request
 from bs4 import BeautifulSoup
-import sys,requests
+import sys,requests,json
 
 app = Flask(__name__)
 cache = cacheForLRU()
@@ -47,7 +47,8 @@ def processData():
     if 'stockCode' in request.json:
         stockCode = request.json["stockCode"]
         data = extractStockCurrentPrice(stockCode)
-        return data
+        result['stockDetails'],result['currentCache'] = data,cache.cache
+        return json.dumps([result])
     else:
         return 'Please Provide Stock Code Details'
 
